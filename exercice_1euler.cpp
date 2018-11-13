@@ -19,14 +19,13 @@ int main()
 	cin >> iter_max ;
 	cout<<"\n";
 	while ((valeur > seuil) && (n < iter_max )){ // Boucle de calcul
-		// Nombre d'itérations inconnu à priori donc borné par le maximum autorisé
+		// Nombre d'itÃ©rations inconnu Ã  priori donc bornÃ© par le maximum autorisÃ©
 		somme+=valeur;
 		n++;
 		valeur=1./Factorielle(n);
 		cout<<"iteration " <<n<<" : "<<valeur <<endl;
 	}
 	cout<<"\n";
-	//m_euler = sqrt(6*somme);
 	m_euler = 1+somme;
 	cout <<"Seuil de convergence : "<< seuil <<" Cout (nombre d'iterations) : "<< n << endl;
 	cout <<"Valeur approchee de euler = "<< m_euler << " Precision: " << fabs(EULER-m_euler) << endl;
