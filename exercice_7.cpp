@@ -10,7 +10,6 @@ class Entier
 {
 	unsigned int valeur; // valeur est un attribut privé par défaut
 	public :
-		
 	friend void Permut(Entier &, Entier &);// méthode externe amicale
 
 	void Saisie() // méthode de saisie
@@ -56,7 +55,6 @@ class Reel
 	float valeur; // valeur est un attribut privé par défaut
 	public :
 	// méthode externe amicale
-
 	friend void Permut(Reel &, Reel &);
 	
 	void Saisie() // méthode de saisie
@@ -98,7 +96,7 @@ class Complexe
 	public :
 	// méthodes externes amicales
 	friend void Permut(Complexe &, Complexe &);
-	friend float module(Complexe);
+	friend float Module(Complexe);
 	
 	void Saisie(char * chaine) // méthode de saisie
 	{
@@ -110,7 +108,10 @@ class Complexe
 	
 	void Affichage(char * chaine) // méthode d'affichage
 	{
-		cout << chaine << " : " << Reel << "\t" << Im << endl;
+		char signe;
+		signe='+';
+		if(Im<0)signe='-';
+		cout << chaine << Reel << signe <<abs(Im) <<"i"<< endl;
 	}
 	
 	void Addition(Complexe A, Complexe B) // méthode d'addition
@@ -118,13 +119,15 @@ class Complexe
 		Reel=A.Reel+B.Reel;
 		Im=A.Im+B.Im;
 	}
+	
 	void Conjugue(void) {
 		Im=-Im;
 	}
+	
 	void Multiplication(Complexe A, Complexe B)
 	{
-		Reel=A.Reel*B.Reel-A.Im*B.Im;
-		Im=A.Reel*B.Im+A.Im*B.Reel;
+		Reel = A.Reel * B.Reel - A.Im * B.Im;
+		Im = A.Reel * B.Im + A.Im * B.Reel;
 	}
 	
 	void Division(Complexe A, Complexe B)
@@ -132,12 +135,21 @@ class Complexe
 		Complexe aux;
 		B.Conjugue();
 		aux.Multiplication(A,B);
-		//aux.division(aux, Module(B)*Module(B));
+		//aux.Division(aux, Module(B)*Module(B));
 		*this=aux; // similaire à : Reel=aux.Reel; Im=aux.Im;
-	}
-	
-	float Module(Complexe A){
-		return sqrt((A.Reel*A.Reel)+(A.Im*A.Im));
+		
+		/*
+		Complexe res;
+		Complexe complement, num, denum;
+		complement.Re=b.Re;
+		complement.Im=-b.Im;
+		num = Multiplication(a, complement);
+		denum = Multiplication(b, complement);
+		res.Re = Division(num.Re, denum.Re);
+		res.Im = Division(num.Im, denum.Re);
+		return res;
+		*/
+		
 	}
 };//Fin de la classe des Complexe
 
@@ -149,14 +161,17 @@ int main()
 	A.Saisie("A ");
 	A.Affichage("A = ");
 	B.Saisie("B ");
+	B.Affichage("B = ");
 	C.Addition(A,B);
 	C.Affichage("somme : ");
 	C.Multiplication(A,B);
 	C.Affichage("multiplication : ");
 	C.Division(A,B);
 	C.Affichage("division : ");
-	//C.Modulo(A,B);
-	//C.Affichage("modulo : ");
+	Permut(A,B);
+	A.Affichage("A = ");
+	B.Affichage("B = ");
+	cout<< Module(B);
 	system("PAUSE");
 	return(EXIT_SUCCESS);
 }
@@ -171,7 +186,7 @@ void Permut(Entier &i, Entier &j)
 
 void Permut(Reel &i, Reel &j)
 {
-	Entier aux;
+	Reel aux;
 	aux.valeur=i.valeur;
 	i.valeur=j.valeur;
 	j.valeur=aux.valeur;
@@ -179,12 +194,19 @@ void Permut(Reel &i, Reel &j)
 
 void Permut(Complexe &i, Complexe &j)
 {
-	Entier aux;
-	aux.valeur=i.valeur;
-	i.valeur=j.valeur;
-	j.valeur=aux.valeur;
+	Complexe aux;
+	aux.Im=j.Im;
+	aux.Reel=j.Reel;
+	j.Reel=i.Reel;
+	j.Im=i.Im;
+	i.Im=aux.Im;
+	i.Reel=aux.Reel;
 }
 
+float Module(Complexe A){
+	return sqrt(pow(A.Reel,2)+pow(A.Im,2));
+}
+	
 void AfficherMessage(char* message){
 	cout<< message <<endl;	
 }
