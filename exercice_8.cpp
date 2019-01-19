@@ -1,5 +1,6 @@
 /*EXERCICE 8 DU CHEF D'OEUVRE TECHNOLOGIE OBJET*/
 /*Programme réalisé par Adrien Pillou*/
+
 using namespace std;
 #include <iostream>
 #include <stdlib.h>
@@ -57,9 +58,9 @@ Reels::Reels(float valeur=0){
 
 class Complexes
 {
-	/*friend Complexes operator +(Complexes, Complexes);
+	friend Complexes operator +(Complexes, Complexes);
 	friend Complexes operator *(Complexes, Complexes);
-	friend Complexes operator /(Complexes, Complexes);*/
+	friend Complexes operator /(Complexes, Complexes);
 	friend Complexes operator +(Reels, Complexes);
 	friend Complexes operator *(Reels, Complexes);
 	friend Complexes operator /(Reels, Complexes);
@@ -275,13 +276,6 @@ bool operator <(Complexes a, Complexes b){
 bool operator >(Complexes a, Complexes b){
 	return(a.Module()>b.Module())?true:false;
 }
-/*
-Entiers *operator + (Entiers tabUn[3], Entiers *tabDeux[3]){
-	//Entiers bufferTab[3];
-	return 0;
-}*/
-
-	
 #pragma endregion OPERATEURS
 
 int main()
