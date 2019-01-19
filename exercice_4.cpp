@@ -1,4 +1,4 @@
-/*EXERCICE 4 CHEF D'OEUVRE TECHNOLOGIE OBJET*/
+/*EXERCICE 4 DU CHEF D'OEUVRE TECHNOLOGIE OBJET*/
 /*Programme réalisé par Adrien Pillou*/
 
 using namespace std;
@@ -14,38 +14,34 @@ float Circonference(float rayon);
 int main()
 {
 	float m_Rayon;
-	//Demande du rayon de la sphere :
-	cout<< "Entrez le rayon de votre sphere : ";
+	
+	//Demande du rayon de la sphère :
+	cout<< "Entrez le rayon r (m) de votre sphere : ";
 	cin>>m_Rayon;
-	//Affichage des résultats :
-	cout<< "Votre sphere a un circonference de "<<Circonference(m_Rayon)<<" unites cubiques" <<endl;
-	cout<< "Votre sphere a un surface de "<<Surface(m_Rayon)<<" unites cubiques" <<endl;
-	cout<< "Votre sphere a un volume de "<<Volume(m_Rayon)<<" unites cubiques" <<endl;
+	
+	//Affichage du résultat :
+	cout<< "\nVotre sphere a un Volume de "<<Volume(m_Rayon)<<" m^3" <<endl;
+
 	return(0);
 }
 
-float Volume(float rayon)//Calcul du volume de la sphere
+float Volume(float rayon)//Calcul et retourne le volume de la sphère
 {
 	float volume;
 	volume = Surface(rayon)*(rayon/3);
 	return volume;
 }
 
-float Surface(float rayon)//Calcul de la surface de la sphere
+float Surface(float rayon)//Calcul et retourne la surface de la sphère
 {
 	float surface;
 	surface = 2*rayon*Circonference(rayon);
 	return surface;
 }
 
-float Circonference(float rayon)//Calcul de la circonference de la sphere
+float Circonference(float rayon)//Calcul et retourne la circonference de la sphère
 {
 	float circonference;
 	circonference = 2*pi*rayon;
 	return circonference;
 }
-
-
-
-
-

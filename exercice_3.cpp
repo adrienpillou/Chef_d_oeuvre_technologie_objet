@@ -1,21 +1,23 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+/*EXERCICE 3 DU CHEF D'OEUVRE TECHNOLOGIE OBJET*/
+/*Programme réalisé par Adrien Pillou*/
+
 using namespace std;
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+#include <iostream>
+
+int f(int n);
+
+int main(int argc, char** argv)
+{
+	int n;
+	cout << "Entrez n : "<<endl;
+	cin >> n;
+	cout <<"f(n) = "<<f(n)<<endl;
+	system("pause");
+	return 0;
+}
 
 int f(int n)
 {
 	if(n>100) return(n-10); 
 	else return (f(f(n+11)));
 }
-
-int main(int argc, char** argv)
-{
-	int n;
-	cout << "Entrez un n : "<<endl;
-	cin >> n;
-	cout <<"f(n) = "<<f(n);
-	return 0;
-}
-

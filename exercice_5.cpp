@@ -11,6 +11,8 @@ struct Complexe{
 	float Im;
 };
 
+void Affiche(char*);
+
 void Saisie(int*, char*);
 void Affiche(int, char*);
 int Addition(int, int);
@@ -29,11 +31,8 @@ Complexe Addition(Complexe, Complexe);
 Complexe Multiplication(Complexe, Complexe);
 Complexe Division(Complexe, Complexe);
 
-
-
 int main()
 {
-	
 	int choix=0;
 	bool peutContinuer = false;
 	
@@ -42,7 +41,9 @@ int main()
 		cout<<"1. Nombres entiers"<<endl;
 		cout<<"2. Nombres reels"<<endl;
 		cout<<"3. Nombres complexe"<<endl;
+		Affiche("\n");
 		Saisie(&choix,"Choisissez le mode : " );
+		
 		switch(choix){
 			case 1:
 				//Nombres entiers :
@@ -52,6 +53,7 @@ int main()
 				Saisie(&entier2, "Veuillez entrer le second entier : ");
 				Affiche(entier1, "Valeur du premier entier: ");
 				Affiche(entier2, "Valeur du second entier: ");
+				Affiche("\n");
 				Affiche(Addition(entier1, entier2), "Resultat de l'addition : ");
 				Affiche(Multiplication(entier1, entier2), "Resultat de la multiplication : ");
 				Affiche(Division(entier1, entier2), "Resultat de la division : ");
@@ -66,6 +68,7 @@ int main()
 				Saisie(&reel2, "Veuillez entrer le second reel : ");
 				Affiche(reel1, "Valeur du premier reel : ");
 				Affiche(reel2, "Valeur du second reel : ");
+				Affiche("\n");
 				Affiche(Addition(reel1, reel2),"Resultat de l'addition : ");
 				Affiche(Multiplication(reel1, reel2),"Resultat de la multiplication : ");
 				Affiche(Division(reel1, reel2),"Resultat de la division : ");
@@ -76,14 +79,11 @@ int main()
 				//Nombres complexes :
 				cout<<"\n*** NOMBRES COMPLEXES ***"<<endl;
 				Complexe comp1,comp2;
-				/*Saisie(&comp1.Re, "Veuillez entrer la partie reel du premier nombre : ");
-				Saisie(&comp1.Im, "Veuillez entrer la partie imaginaire du premier nombre : ");
-				Saisie(&comp2.Re, "Veuillez entrer la partie reel du second nombre : ");
-				Saisie(&comp2.Im, "Veuillez entrer la partie imaginaire du second nombre : ");*/
 				Saisie(&comp1,"Veuillez entrer la partie reel puis imaginaire du premier nombre complexe : ");
 				Saisie(&comp2,"Veuillez entrer la partie reel puis imaginaire du second nombre complexe : ");
 				Affiche(comp1, "Valeur du premier nombre complexe : ");
 				Affiche(comp2, "Valeur du second nombre complexe : ");
+				Affiche("\n");
 				Affiche(Addition(comp1, comp2), "Resultat de l'addition des deux complexes : ");
 				Affiche(Multiplication(comp1, comp2), "Resultat de la multiplication des deux complexes : ");
 				Affiche(Division(comp1, comp2), "Resultat de la division des deux complexes : ");
@@ -95,7 +95,12 @@ int main()
 			break;
 		}
 	}
+	system("PAUSE");
 	return 0;
+}
+
+void Affiche(char* message){
+	cout<<message;
 }
 
 #pragma region INT
@@ -117,10 +122,13 @@ int Multiplication(int a, int b){
 }
 
 int Division(int a, int b){
-	return a/b;
+	if(b!=0)return a/b;
+	else{
+		Affiche("Erreur : division par 0 !\n");
+		return 0;
+	}
 }
 #pragma endregion INT
-
 
 #pragma region FLOAT
 void Saisie(float* nombre, char* message){
@@ -141,10 +149,13 @@ float Multiplication(float a, float b){
 }
 
 float Division(float a, float b){
-	return a/b;
+	if(b!=0)return a/b;
+	else{
+		Affiche("Erreur : division par 0 !\n");
+		return 0;
+	}
 }
 #pragma endregion FLOAT
-
 
 #pragma region COMPLEXE
 void Saisie(Complexe* nombre, char* message){
@@ -175,6 +186,12 @@ Complexe Multiplication(Complexe a, Complexe b){
 Complexe Division(Complexe a, Complexe b){
 	Complexe res;
 	Complexe complement, num, denum;
+	if(b.Im==0 && b.Re==0){
+		Affiche("Erreur : division par 0 !\n");
+		res.Im=0;
+		res.Re=0;
+		return res;
+	}
 	complement.Re=b.Re;
 	complement.Im=-b.Im;
 	num = Multiplication(a, complement);
@@ -184,8 +201,4 @@ Complexe Division(Complexe a, Complexe b){
 	return res;
 }
 #pragma endregion COMPLEXE
-
-
-
-
 

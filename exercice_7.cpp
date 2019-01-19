@@ -1,3 +1,6 @@
+/*EXERCICE 7 DU CHEF D'OEUVRE TECHNOLOGIE OBJET*/
+/*Programme réalisé par Adrien Pillou*/
+
 using namespace std ;
 #include <iostream>
 #include <stdlib.h>
@@ -5,16 +8,15 @@ using namespace std ;
 
 void AfficherMessage(char*);
 
-
 class Entier
 {
 	unsigned int valeur; // valeur est un attribut privé par défaut
 	public :
 	friend void Permut(Entier &, Entier &);// méthode externe amicale
 
-	void Saisie() // méthode de saisie
+	void Saisie(char *chaine) // méthode de saisie
 	{
-		cout << "Valeur entiere a saisir : " ;
+		cout << "Valeur entiere de "<< chaine <<" a saisir : " ;
 		cin >> valeur;
 	}
 	
@@ -28,11 +30,13 @@ class Entier
 		valeur=A.valeur+B.valeur;
 	}
 	
-	void Multiplication(Entier A, Entier B){
+	void Multiplication(Entier A, Entier B)// méthode de multiplication
+	{
 		valeur =A.valeur*B.valeur;
 	}
 	
-	void Div(Entier A, Entier B){// /!\ div par 0
+	void Division(Entier A, Entier B)// méthode de division
+	{
 		if(B.valeur != 0){
 			valeur=A.valeur/B.valeur;
 		}else{
@@ -41,7 +45,8 @@ class Entier
 		}
 	}
 	
-	void Modulo(Entier A, Entier B){
+	void Modulo(Entier A, Entier B)// méthode modulo
+	{
 		if(B.valeur!=0)valeur=A.valeur%B.valeur;
 		else{
 			AfficherMessage("Erreur : Division par 0 !");
@@ -57,18 +62,18 @@ class Reel
 	// méthode externe amicale
 	friend void Permut(Reel &, Reel &);
 	
-	void Saisie() // méthode de saisie
+	void Saisie(char *chaine) // méthode de saisie
 	{
-		cout << "Valeur Reel a saisir : " ;
+		cout << "Valeur Reelle de "<< chaine <<" a saisir : " ;
 		cin >> valeur;
 	}
 	
-	void Affichage(char * chaine) // méthode d'affichage
+	void Affichage(char * chaine)
 	{
 		cout << chaine << valeur << endl;
 	}
 	
-	void Addition(Reel A, Reel B) // méthode d'addition
+	void Addition(Reel A, Reel B)
 	{
 		valeur=A.valeur+B.valeur;
 	}
@@ -78,16 +83,24 @@ class Reel
 		
 	}
 	
-	void Div(Reel A, Reel B){
+	void Division(Reel A, Reel B){
 		if(B.valeur!=0)valeur=A.valeur/B.valeur;
-		else AfficherMessage("Erreur : Division par 0 !");	
+		else {
+			AfficherMessage("Erreur : Division par 0 !");	
+			valeur=0;
+		}
 	}
 	
 	void Modulo(Reel A, Reel B){
-		if(B.valeur!=0)valeur=(int)A.valeur%(int)B.valeur;
-		else AfficherMessage("Erreur : Division par 0 !");	
+		if(B.valeur!=0){
+			valeur=(int)A.valeur%(int)B.valeur;
+		}
+		else{
+			AfficherMessage("Erreur : Division par 0 !");
+			valeur=0;	
+		} 
 	}
-};//Fin de la classe des Reel
+};//Fin de la classe Reel
 
 class Complexe
 {
@@ -98,15 +111,15 @@ class Complexe
 	friend void Permut(Complexe &, Complexe &);
 	friend float Module(Complexe);
 	
-	void Saisie(char * chaine) // méthode de saisie
+	void Saisie(char *chaine)
 	{
-		cout << chaine << "Partie reelle a saisir : " ;
+		cout << "Partie reelle de "<< chaine <<" a saisir : " ;
 		cin >> Reel;
-		cout << chaine << "Partie imaginaire a saisir : " ;
+		cout << "Partie imaginaire de "<< chaine <<" a saisir : " ;
 		cin >> Im;
 	}
 	
-	void Affichage(char * chaine) // méthode d'affichage
+	void Affichage(char * chaine)
 	{
 		char signe;
 		signe='+';
@@ -114,13 +127,14 @@ class Complexe
 		cout << chaine << Reel << signe <<abs(Im) <<"i"<< endl;
 	}
 	
-	void Addition(Complexe A, Complexe B) // méthode d'addition
+	void Addition(Complexe A, Complexe B)
 	{
 		Reel=A.Reel+B.Reel;
 		Im=A.Im+B.Im;
 	}
 	
-	void Conjugue(void) {
+	void Conjugue(void) 
+	{
 		Im=-Im;
 	}
 	
@@ -130,48 +144,53 @@ class Complexe
 		Im = A.Reel * B.Im + A.Im * B.Reel;
 	}
 	
+	void Division (Complexe A, float x) 
+	{
+		Reel=A.Reel/x;
+		Im=A.Im/x;
+	}
+	
 	void Division(Complexe A, Complexe B)
 	{
 		Complexe aux;
 		B.Conjugue();
 		aux.Multiplication(A,B);
-		//aux.Division(aux, Module(B)*Module(B));
-		*this=aux; // similaire à : Reel=aux.Reel; Im=aux.Im;
-		
-		/*
-		Complexe res;
-		Complexe complement, num, denum;
-		complement.Re=b.Re;
-		complement.Im=-b.Im;
-		num = Multiplication(a, complement);
-		denum = Multiplication(b, complement);
-		res.Re = Division(num.Re, denum.Re);
-		res.Im = Division(num.Im, denum.Re);
-		return res;
-		*/
-		
+		if(Module(B)!=0){
+			aux.Division(aux, Module(B)*Module(B));
+			*this=aux; // similaire à : Reel=aux.Reel; Im=aux.Im;
+		}
+		else{
+			AfficherMessage("Erreur : Division par 0 !");
+			Reel=0;
+			Im=0;
+		} 
 	}
-};//Fin de la classe des Complexe
-
-
+};//Fin de la classe Complexe
 
 int main()
 {
-	Complexe A,B,C;
-	A.Saisie("A ");
+	Reel A,B,C;
+	/*A.Saisie("A");
 	A.Affichage("A = ");
-	B.Saisie("B ");
-	B.Affichage("B = ");
+	cout << "module(A) = " << Module(A) << endl;
+	A.Conjugue();
+	A.Affichage("conjugue(A) = ");
+	A.Division(A, Module(A));
+	A.Affichage("A/module(A) = ");
+	B.Saisie("B");
 	C.Addition(A,B);
-	C.Affichage("somme : ");
-	C.Multiplication(A,B);
-	C.Affichage("multiplication : ");
-	C.Division(A,B);
-	C.Affichage("division : ");
-	Permut(A,B);
-	A.Affichage("A = ");
+	C.Affichage("somme = ");
+	Permut(B,C);
 	B.Affichage("B = ");
-	cout<< Module(B);
+	C.Affichage("C = ");*/
+	A.Saisie("A");
+	A.Affichage("A = ");
+	B.Saisie("B");
+	B.Affichage("B = ");
+	C.Multiplication(A,B);
+	C.Affichage("A*B = ");
+	C.Division(A,B);
+	C.Affichage("A/B = ");
 	system("PAUSE");
 	return(EXIT_SUCCESS);
 }
