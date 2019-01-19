@@ -24,10 +24,10 @@ void DeplacerDisque(int num, char tourOrigine, char tourDestination, char tourIn
 {
 	if (num == 1)
     {
-        printf("\nDeplacement du disque 1 de la tour %c vers la tour %c", tourOrigine, tourDestination);
+        cout<<"\nDeplacement du disque 1 de la tour "<< tourOrigine << " vers la tour "<< tourDestination;
         return;
     }
     DeplacerDisque(num - 1, tourOrigine, tourIntermediaire, tourDestination);
-    printf("\nDeplacement du disque %d de la tour %c vers la tour %c", num, tourOrigine, tourDestination);
+    cout<<"\nDeplacement du disque "<< num <<" de la tour "<< tourOrigine <<" vers la tour "<<tourDestination;
     DeplacerDisque(num - 1, tourIntermediaire, tourDestination, tourOrigine);
 }
