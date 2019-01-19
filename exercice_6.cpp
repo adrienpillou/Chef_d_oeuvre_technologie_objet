@@ -11,12 +11,12 @@ void DeplacerDisque(int, char, char, char);
 int main()
 {
     int num;
-    //cout<<"Enter the number of disks : ";
-    cout<<"Entrez le nombre de disque : ";
-    cin>>num;
-    //cout<<"The sequence of moves involved in the Tower of Hanoi are :\n";
+    do{
+    	cout<<"Entrez le nombre de disque : ";
+    	cin>>num;
+	}while(num==0);
     cout<<"\nDeplacements necessaire a la resolution du probleme :\n";
-    if(num>0)DeplacerDisque(num, 'A', 'C', 'B');
+    DeplacerDisque(num, 'A', 'C', 'B');
     return 0;
 }
 
