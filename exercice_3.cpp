@@ -10,6 +10,9 @@ int main(int argc, char** argv)
 {
 	int n;
 	cout << "Entrez n : "<<endl;
+	/*for(int n=64;n<=128;n++){
+		cout <<"f("<< n <<") = "<<f(n)<<endl;
+	}*/
 	cin >> n;
 	cout <<"f(n) = "<<f(n)<<endl;
 	system("pause");
@@ -19,5 +22,8 @@ int main(int argc, char** argv)
 int f(int n)
 {
 	if(n>100) return(n-10); 
-	else return (f(f(n+11)));
+	else{
+		cout<<n+11<<endl;
+		return (f(f(n+11)));
+	} 
 }

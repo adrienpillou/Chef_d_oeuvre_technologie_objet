@@ -21,7 +21,7 @@ int main()
 	
 	//Affichage du résultat :
 	cout<< "\nVotre sphere a un Volume de "<<Volume(m_Rayon)<<" m^3" <<endl;
-
+	system("pause");
 	return(0);
 }
 
