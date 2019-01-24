@@ -1,4 +1,4 @@
-/*EXERCICE 5 CHEF D'OEUVRE TECHNOLOGIE OBJET*/
+/*EXERCICE 5 DU CHEF D'OEUVRE TECHNOLOGIE OBJET*/
 /*Programme réalisé par Adrien Pillou*/
 
 using namespace std;

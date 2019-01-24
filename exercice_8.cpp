@@ -5,6 +5,7 @@ using namespace std;
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <vector>
 
 void AfficherMessage(char* msg);
 
@@ -278,12 +279,20 @@ bool operator >(Complexes a, Complexes b){
 }
 #pragma endregion OPERATEURS
 
+Entiers* operator + (Entiers const& *a, Entiers const& *b){
+	int buffer[3];
+	return buffer;
+}
+
 int main()
 {
-	Entiers a(32), b(64);
+	/*Entiers v1[3], v2[3], buffer[3];
+	buffer = v1+v2;*/
+	
+	/*Entiers a(32), b(64);
 	a.Affiche("a = ");
 	b.Affiche("b = ");
-	if(a<b)AfficherMessage("A est plus petit que B");
+	if(a<b)AfficherMessage("A est plus petit que B");*/
 	system("PAUSE");
 	return(EXIT_SUCCESS);
 }
